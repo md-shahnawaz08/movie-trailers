@@ -1,0 +1,16 @@
+#title {
+  font-family: "Brush Script MT", cursive;
+  font-size: 1.1rem;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 100;
+}
+
+.movie-list {
+  height: -webkit-fill-available;
+  background-color: lighten(black, 10%);
+
+  .movie-card {
+    padding: 1.25rem;
+  }
+}

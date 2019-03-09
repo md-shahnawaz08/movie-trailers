@@ -1,0 +1,61 @@
+<section class="ui-g">
+  <div class="ui-lg-4 ui-md-6 ui-sm-6 ui-g">
+    <div class="ui-g-12 ui-g">
+      <div class="ui-g-4" id="title">{{ texts.MOVIE_TRAILERS }}</div>
+      <div class="ui-g-4">
+        <button
+          pButton
+          type="button"
+          [label]="texts.COMING_SOON"
+          [ngClass]="{ 'ui-button-secondary': nowShowing }"
+          (click)="fetchComingSoon()"
+        ></button>
+      </div>
+      <div class="ui-g-4">
+        <button
+          pButton
+          type="button"
+          [label]="texts.NOW_SHOWING"
+          [ngClass]="{ 'ui-button-secondary': !nowShowing }"
+          (click)="fetchNowShowing()"
+        ></button>
+      </div>
+    </div>
+  </div>
+  <div class="ui-lg-4 ui-md-1 ui-sm-0"></div>
+  <div class="ui-lg-4 ui-md-5 ui-sm-6 ui-g">
+    <div class="ui-g-11 ui-g">
+      <div class="ui-g-4">
+        <p-dropdown
+          [options]="sortByOptions"
+          [(ngModel)]="sortByPopularity"
+        ></p-dropdown>
+      </div>
+      <div class="ui-g-4">
+        <p-multiSelect
+          [options]="languages"
+          [(ngModel)]="selectedLanguages"
+        ></p-multiSelect>
+      </div>
+      <div class="ui-g-4">{{ texts.NOW_SHOWING }}</div>
+    </div>
+    <div class="ui-g-1">X</div>
+  </div>
+</section>
+
+<div class="movie-list">
+  <div class="ui-g">
+    <div
+      *ngFor="let movie of allMovies"
+      class="ui-xl-2 ui-lg-2 ui-md-3 ui-sm-6 movie-card"
+    >
+      <img
+        width="100%"
+        [src]="
+          'https://in.bmscdn.com/events/moviecard/' + movie.EventCode + '.jpg'
+        "
+      />
+      {{ movie.EventName }}
+    </div>
+  </div>
+</div>

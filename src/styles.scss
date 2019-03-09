@@ -1,1 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background-color: black;
+  color: white;
+  font-size: x-small;
+  margin: unset;
+
+  .ui-button {
+    width: 100%;
+
+    .ui-button-text {
+      font-size: xx-small;
+    }
+  }
+
+  .ui-dropdown {
+    min-width: unset;
+    width: 100%;
+
+    .ui-widget {
+      font-size: x-small;
+    }
+
+    .ui-dropdown-label {
+      font-size: xx-small;
+    }
+  }
+
+  .ui-multiselect {
+    width: 100%;
+
+    .ui-multiselect-header {
+      display: none;
+    }
+    .ui-multiselect-label {
+      font-size: xx-small;
+    }
+
+    .ui-multiselect-item {
+      font-size: xx-small;
+    }
+  }
+
+  .ui-chkbox .ui-chkbox-box {
+    height: unset;
+    width: unset;
+  }
+}
