@@ -6,16 +6,19 @@ import { ButtonModule } from "primeng/button";
 import { DropdownModule } from "primeng/dropdown";
 import { FormsModule } from "@angular/forms";
 import { MultiSelectModule } from "primeng/multiselect";
+import { MovieCardComponent } from "./movie-card/movie-card.component";
+import { AngularFontAwesomeModule } from "angular-font-awesome";
 
 @NgModule({
-  declarations: [TrailerComponent],
+  declarations: [TrailerComponent, MovieCardComponent],
   imports: [
     CommonModule,
     TrailerRoutingModule,
     ButtonModule,
     DropdownModule,
     FormsModule,
-    MultiSelectModule
+    MultiSelectModule,
+    AngularFontAwesomeModule
   ]
 })
 export class TrailerModule {}

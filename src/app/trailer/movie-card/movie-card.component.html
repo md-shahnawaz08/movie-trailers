@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="show-date">{{ movie.ShowDate?.split(",")[0] }}</div>
+  <img
+    width="100%"
+    [src]="'https://in.bmscdn.com/events/moviecard/' + movie.EventCode + '.jpg'"
+  />
+  <div class="rate">
+    <div class="rating"><fa name="thumbs-up"></fa> {{ movie.avgRating }}%</div>
+    <div class="votes">{{ movie.totalVotes }} {{ texts.VOTES }}</div>
+  </div>
+  <p class="name">{{ movie.EventName }}</p>
+</div>
