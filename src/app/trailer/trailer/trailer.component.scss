@@ -7,8 +7,23 @@
 }
 
 fa {
+  cursor: pointer;
+}
+
+fa#filter-close {
   font-size: 1.3rem;
   font-weight: 100;
+}
+
+.all-filters {
+  padding: 0.3rem 1rem;
+}
+
+.chips {
+  padding: 0.3rem;
+  border-radius: 9rem;
+  background: lighten(black, 30%);
+  margin-right: 1rem;
 }
 
 .movie-list {

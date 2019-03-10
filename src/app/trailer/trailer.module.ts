@@ -8,6 +8,7 @@ import { FormsModule } from "@angular/forms";
 import { MultiSelectModule } from "primeng/multiselect";
 import { MovieCardComponent } from "./movie-card/movie-card.component";
 import { AngularFontAwesomeModule } from "angular-font-awesome";
+import { ChipsModule } from "primeng/chips";
 
 @NgModule({
   declarations: [TrailerComponent, MovieCardComponent],
@@ -18,7 +19,8 @@ import { AngularFontAwesomeModule } from "angular-font-awesome";
     DropdownModule,
     FormsModule,
     MultiSelectModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    ChipsModule
   ]
 })
 export class TrailerModule {}

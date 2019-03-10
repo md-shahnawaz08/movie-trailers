@@ -79,7 +79,7 @@ export class TrailerComponent implements OnInit, OnDestroy {
   }
 
   genreIncludes(genres: string, selectedGenres: string[]): boolean {
-    for (let genre in selectedGenres) {
+    for (let genre of selectedGenres) {
       if (genres.includes(genre)) {
         return true;
       }
@@ -123,6 +123,21 @@ export class TrailerComponent implements OnInit, OnDestroy {
     this.selectedGenres = [];
     this.selectedLanguages = [];
     this.filteredMovies = this.allMovies;
+  }
+
+  removeFilter(type: string, elem: string) {
+    if (type === "language") {
+      this.selectedLanguages = _.filter(
+        this.selectedLanguages,
+        lang => lang !== elem
+      );
+    } else {
+      this.selectedGenres = _.filter(
+        this.selectedGenres,
+        genre => genre !== elem
+      );
+    }
+    this.filterMovies();
   }
 
   sortMovies() {

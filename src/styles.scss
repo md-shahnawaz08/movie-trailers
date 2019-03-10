@@ -45,4 +45,14 @@ body {
     height: unset;
     width: unset;
   }
+
+  .ui-chips {
+    .ui-chips-token-label {
+      font-size: xx-small;
+    }
+
+    .ui-chips-input-token {
+      font-size: xx-small;
+    }
+  }
 }

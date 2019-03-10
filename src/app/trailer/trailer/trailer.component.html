@@ -50,12 +50,27 @@
       </div>
     </div>
     <div class="ui-g-1 ui-g">
-      <div class="ui-g-12"><fa name="times" (click)="clearFilter()"></fa></div>
+      <div class="ui-g-12">
+        <fa id="filter-close" name="times" (click)="clearFilter()"></fa>
+      </div>
     </div>
   </div>
 </section>
 
 <div class="movie-list">
+  <div class="ui-g">
+    <div class="ui-g-12 ui-g" *ngIf="selectedGenres.length || selectedLanguages.length">
+      <span class="all-filters">{{ texts.APPLIED_FILTERS }}: </span>
+      <span class="chips" *ngFor="let lang of selectedLanguages">
+        {{ lang }}
+        <fa name="times" (click)="removeFilter('language', lang)"></fa>
+      </span>
+      <span class="chips" *ngFor="let genre of selectedGenres">
+        {{ genre }}
+        <fa name="times" (click)="removeFilter('genre', genre)"></fa>
+      </span>
+    </div>
+  </div>
   <div class="ui-g">
     <div
       *ngFor="let movie of filteredMovies"
