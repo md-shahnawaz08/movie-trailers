@@ -1,26 +1,25 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { TrailerRoutingModule } from "./trailer-routing.module";
-import { TrailerComponent } from "./trailer/trailer.component";
-import { ButtonModule } from "primeng/button";
-import { DropdownModule } from "primeng/dropdown";
-import { FormsModule } from "@angular/forms";
-import { MultiSelectModule } from "primeng/multiselect";
-import { MovieCardComponent } from "./movie-card/movie-card.component";
-import { AngularFontAwesomeModule } from "angular-font-awesome";
-import { ChipsModule } from "primeng/chips";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TrailerRoutingModule } from './trailer-routing.module';
+import { TrailerComponent } from './trailer/trailer.component';
+import { MovieCardComponent } from './movie-card/movie-card.component';
+import { SharedModule } from '@app/shared/shared.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faPlayCircle } from '@fortawesome/free-regular-svg-icons';
+
 
 @NgModule({
   declarations: [TrailerComponent, MovieCardComponent],
   imports: [
     CommonModule,
     TrailerRoutingModule,
-    ButtonModule,
-    DropdownModule,
-    FormsModule,
-    MultiSelectModule,
-    AngularFontAwesomeModule,
-    ChipsModule
+    SharedModule,
+    FontAwesomeModule
   ]
 })
-export class TrailerModule {}
+export class TrailerModule {
+  constructor() {
+    library.add(faPlayCircle);
+  }
+}

@@ -4,6 +4,23 @@ body {
   color: white;
   font-size: x-small;
   margin: unset;
+  font-family: Arial, Helvetica, sans-serif;
+
+  .welcome {
+    .ui-button-text {
+      font-size: large !important;
+    }
+  }
+
+  .ui-inputtext {
+    width: 100%;
+  }
+
+  .dup-num {
+    .ui-button-text {
+      font-size: initial !important;
+    }
+  }
 
   .ui-button {
     width: 100%;
@@ -32,6 +49,7 @@ body {
     .ui-multiselect-header {
       display: none;
     }
+
     .ui-multiselect-label {
       font-size: xx-small;
     }

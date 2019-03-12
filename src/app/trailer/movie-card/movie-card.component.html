@@ -1,11 +1,14 @@
-<div class="container">
-  <div class="show-date">{{ movie.ShowDate?.split(",")[0] }}</div>
-  <img
-    width="100%"
-    [src]="'https://in.bmscdn.com/events/moviecard/' + movie.EventCode + '.jpg'"
-  />
+<div class="container-ng">
+  <div class="show-date">
+    <div>{{ movie.ShowDate?.split(",")[0].split(" ")[0] }}</div>
+    <div>{{ movie.ShowDate?.split(",")[0].split(" ")[1] }}</div>
+  </div>
+  <fa-icon *ngIf="!selected" class="play-btn" [icon]="['far', 'play-circle']"></fa-icon>
+  <img width="100%" [src]="'https://in.bmscdn.com/events/moviecard/' + movie.EventCode + '.jpg'" />
   <div class="rate">
-    <div class="rating"><fa name="thumbs-up"></fa> {{ movie.avgRating }}%</div>
+    <div class="rating">
+      <fa name="thumbs-up"></fa> {{ movie.avgRating }}%
+    </div>
     <div class="votes">{{ movie.totalVotes }} {{ texts.VOTES }}</div>
   </div>
   <p class="name">{{ movie.EventName }}</p>
