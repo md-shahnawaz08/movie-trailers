@@ -26,11 +26,17 @@ fa#filter-close {
   margin-right: 1rem;
 }
 
-.movie-list {
-  height: -webkit-fill-available;
+.all-movies {
   background-color: lighten(black, 10%);
+}
 
-  .video-container {
+.tailer-row {
+  padding: 0.625rem
+}
+
+.movie-list {
+
+  .video-container-ng {
     position: relative;
     padding-bottom: 30%;
 
@@ -43,7 +49,7 @@ fa#filter-close {
     }
   }
 
-  .details-container {
+  .details-container-ng {
     padding-left: 1rem;
 
     .details {
@@ -62,7 +68,6 @@ fa#filter-close {
   }
 
   .movie-card {
-    padding: 1.25rem;
 
     .card-inside {
       padding: 0.25rem;
