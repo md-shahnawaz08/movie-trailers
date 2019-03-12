@@ -30,7 +30,47 @@ fa#filter-close {
   height: -webkit-fill-available;
   background-color: lighten(black, 10%);
 
+  .video-container {
+    position: relative;
+    padding-bottom: 30%;
+
+    .video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .details-container {
+    padding-left: 1rem;
+
+    .details {
+      height: 100%;
+      padding: 0.625rem;
+      background-color: lighten(black, 15%);
+
+      .rates {
+        margin: 1rem 0;
+
+        fa {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+
   .movie-card {
     padding: 1.25rem;
+
+    .card-inside {
+      padding: 0.25rem;
+      cursor: pointer;
+    }
+
+    .selected {
+      border: 2px solid #1ea04c;
+    }
   }
 }

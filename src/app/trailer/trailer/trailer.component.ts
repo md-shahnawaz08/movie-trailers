@@ -1,15 +1,16 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import Texts from "@app/constants/texts";
-import { MoviesService } from "@app/services/movies.service";
-import * as _ from "lodash";
-import { Movie } from "@app/models/movie";
-import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import Texts from '@app/constants/texts';
+import { MoviesService } from '@app/services/movies.service';
+import * as _ from 'lodash';
+import { Movie } from '@app/models/movie';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
-  selector: "app-trailer",
-  templateUrl: "./trailer.component.html",
-  styleUrls: ["./trailer.component.scss"]
+  selector: 'app-trailer',
+  templateUrl: './trailer.component.html',
+  styleUrls: ['./trailer.component.scss']
 })
 export class TrailerComponent implements OnInit, OnDestroy {
   texts = Texts;
@@ -18,40 +19,47 @@ export class TrailerComponent implements OnInit, OnDestroy {
   selectedLanguages: string[] = [];
   allMovies: Movie[] = [];
   filteredMovies: Movie[] = [];
+  selectedMovie: Movie = new Movie();
   sortByPopularity: true;
   sortByOptions: DropdownOption[] = [
     { label: this.texts.FRESH, value: false },
     { label: this.texts.POPULAR, value: true }
   ];
+  splitIndex = 0;
   selectedGenres: string[] = [];
   genres: DropdownOption[] = [
-    { label: "Action", value: "Action" },
-    { label: "Adventure", value: "Adventure" },
-    { label: "Animation", value: "Animation" },
-    { label: "Biography", value: "Biography" },
-    { label: "Classic", value: "Classic" },
-    { label: "Comedy", value: "Comedy" },
-    { label: "Crime", value: "Crime" },
-    { label: "Drama", value: "Drama" },
-    { label: "Family", value: "Family" },
-    { label: "Fantasy", value: "Fantasy" },
-    { label: "History", value: "History" },
-    { label: "Horror", value: "Horror" },
-    { label: "Musical", value: "Musical" },
-    { label: "Mystery", value: "Mystery" },
-    { label: "Period", value: "Period" },
-    { label: "Psychological", value: "Psychological" },
-    { label: "Romance", value: "Romance" },
-    { label: "Sci-Fi", value: "Sci-Fi" },
-    { label: "Social", value: "Social" },
-    { label: "Sports", value: "Sports" },
-    { label: "Suspense", value: "Suspense" },
-    { label: "Thriller", value: "Thriller" },
-    { label: "War", value: "War" }
+    { label: 'Action', value: 'Action' },
+    { label: 'Adventure', value: 'Adventure' },
+    { label: 'Animation', value: 'Animation' },
+    { label: 'Biography', value: 'Biography' },
+    { label: 'Classic', value: 'Classic' },
+    { label: 'Comedy', value: 'Comedy' },
+    { label: 'Crime', value: 'Crime' },
+    { label: 'Drama', value: 'Drama' },
+    { label: 'Family', value: 'Family' },
+    { label: 'Fantasy', value: 'Fantasy' },
+    { label: 'History', value: 'History' },
+    { label: 'Horror', value: 'Horror' },
+    { label: 'Musical', value: 'Musical' },
+    { label: 'Mystery', value: 'Mystery' },
+    { label: 'Period', value: 'Period' },
+    { label: 'Psychological', value: 'Psychological' },
+    { label: 'Romance', value: 'Romance' },
+    { label: 'Sci-Fi', value: 'Sci-Fi' },
+    { label: 'Social', value: 'Social' },
+    { label: 'Sports', value: 'Sports' },
+    { label: 'Suspense', value: 'Suspense' },
+    { label: 'Thriller', value: 'Thriller' },
+    { label: 'War', value: 'War' }
   ];
+  safeUrl: SafeResourceUrl;
+  selectedMovieImage: string;
   destroy$: Subject<boolean> = new Subject();
 
-  constructor(private moviesService: MoviesService) {}
+  constructor(
+    private moviesService: MoviesService,
+    private domSanitizer: DomSanitizer
+  ) { }
 
   ngOnInit() {
     this.getMovies();
@@ -74,12 +82,12 @@ export class TrailerComponent implements OnInit, OnDestroy {
           );
           this.filterMovies();
         },
-        error => {}
+        error => { }
       );
   }
 
   genreIncludes(genres: string, selectedGenres: string[]): boolean {
-    for (let genre of selectedGenres) {
+    for (const genre of selectedGenres) {
       if (genres.includes(genre)) {
         return true;
       }
@@ -102,6 +110,7 @@ export class TrailerComponent implements OnInit, OnDestroy {
   }
 
   filterMovies() {
+    this.selectedMovie = new Movie();
     this.filteredMovies = _.filter(this.allMovies, (movie: Movie) => {
       let languageWise: boolean;
       let genreWise: boolean;
@@ -120,13 +129,14 @@ export class TrailerComponent implements OnInit, OnDestroy {
   }
 
   clearFilter() {
+    this.selectedMovie = new Movie();
     this.selectedGenres = [];
     this.selectedLanguages = [];
     this.filteredMovies = this.allMovies;
   }
 
   removeFilter(type: string, elem: string) {
-    if (type === "language") {
+    if (type === 'language') {
       this.selectedLanguages = _.filter(
         this.selectedLanguages,
         lang => lang !== elem
@@ -145,6 +155,23 @@ export class TrailerComponent implements OnInit, OnDestroy {
       this.sortByPopularity ? movie.userCount : new Date(movie.ShowDate)
     );
     this.filterMovies();
+  }
+
+  playTrailer(movie: Movie, pre: number, i: number) {
+    let perRow: number;
+    if (window.innerWidth >= 992) {
+      perRow = 6;
+    } else if (window.innerWidth >= 768) {
+      perRow = 4;
+    } else if (window.innerWidth >= 576) {
+      perRow = 3;
+    } else {
+      perRow = 2;
+    }
+    this.splitIndex = pre + i - ((pre + i) % perRow);
+    this.selectedMovie = movie;
+    this.safeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(movie.TrailerURL.replace('watch?v=', 'embed\/'));
+    this.selectedMovieImage = `https://in.bmscdn.com/events/moviecard/${movie.EventCode}.jpg`;
   }
 
   ngOnDestroy() {
