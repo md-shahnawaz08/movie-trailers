@@ -1,3 +1,19 @@
-<p>
-  duplicate-number works!
-</p>
+<div class="container dup-num">
+  <div class="row">
+    <div class="col-12">Existing Array:</div>
+    <div class="col-12">
+      <p-chips [(ngModel)]="existingArray"></p-chips>
+    </div>
+    <div class="col-12 next-line">Enter Input:</div>
+    <div class="col-12">
+      <input type="text" [(ngModel)]="inputData" pInputText placeholder="Eg inputs: 7000, 6000, 8000-8005." />
+    </div>
+    <div class="col-12 next-line">
+      <p-button label="Check Duplicates" (click)="execute()"></p-button>
+    </div>
+    <div class="col-12 next-line">Duplicates:</div>
+    <div class="col-12">{{duplicates.join(', ')}}</div>
+    <div class="col-12 next-line">Final List:</div>
+    <div class="col-12">{{finalList.join(', ')}}</div>
+  </div>
+</div>

@@ -12,6 +12,16 @@ body {
     }
   }
 
+  .ui-inputtext {
+    width: 100%;
+  }
+
+  .dup-num {
+    .ui-button-text {
+      font-size: initial !important;
+    }
+  }
+
   .ui-button {
     width: 100%;
 
