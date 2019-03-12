@@ -157,6 +157,7 @@ export class TrailerComponent implements OnInit, OnDestroy {
   }
 
   playTrailer(movie: Movie, pre: number, i: number, elem: ElementRef) {
+    this.selectedMovie = new Movie();
     let perRow: number;
     if (window.innerWidth >= 992) {
       perRow = 6;
@@ -168,8 +169,8 @@ export class TrailerComponent implements OnInit, OnDestroy {
       perRow = 2;
     }
     this.splitIndex = pre + i - ((pre + i) % perRow);
-    this.selectedMovie = movie;
     this.safeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(movie.TrailerURL.replace('watch?v=', 'embed\/') + '?autoplay=1');
+    this.selectedMovie = movie;
     if (elem) {
       elem.nativeElement.scrollIntoView({ block: 'end', behavior: 'smooth' });
     }
