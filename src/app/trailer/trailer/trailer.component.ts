@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import Texts from '@app/constants/texts';
 import { MoviesService } from '@app/services/movies.service';
 import * as _ from 'lodash';
@@ -53,7 +53,6 @@ export class TrailerComponent implements OnInit, OnDestroy {
     { label: 'War', value: 'War' }
   ];
   safeUrl: SafeResourceUrl;
-  selectedMovieImage: string;
   destroy$: Subject<boolean> = new Subject();
 
   constructor(
@@ -157,7 +156,7 @@ export class TrailerComponent implements OnInit, OnDestroy {
     this.filterMovies();
   }
 
-  playTrailer(movie: Movie, pre: number, i: number) {
+  playTrailer(movie: Movie, pre: number, i: number, elem: ElementRef) {
     let perRow: number;
     if (window.innerWidth >= 992) {
       perRow = 6;
@@ -170,8 +169,10 @@ export class TrailerComponent implements OnInit, OnDestroy {
     }
     this.splitIndex = pre + i - ((pre + i) % perRow);
     this.selectedMovie = movie;
-    this.safeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(movie.TrailerURL.replace('watch?v=', 'embed\/'));
-    this.selectedMovieImage = `https://in.bmscdn.com/events/moviecard/${movie.EventCode}.jpg`;
+    this.safeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(movie.TrailerURL.replace('watch?v=', 'embed\/') + '?autoplay=1');
+    if (elem) {
+      elem.nativeElement.scrollIntoView({ block: 'end', behavior: 'smooth' });
+    }
   }
 
   ngOnDestroy() {

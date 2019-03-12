@@ -7,10 +7,11 @@ import { SharedModule } from '@app/shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlayCircle } from '@fortawesome/free-regular-svg-icons';
+import { ScrollToDirective } from './scroll-to.directive';
 
 
 @NgModule({
-  declarations: [TrailerComponent, MovieCardComponent],
+  declarations: [TrailerComponent, MovieCardComponent, ScrollToDirective],
   imports: [
     CommonModule,
     TrailerRoutingModule,

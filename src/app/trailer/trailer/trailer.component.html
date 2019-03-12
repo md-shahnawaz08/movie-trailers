@@ -51,21 +51,21 @@
   </div>
   <div class="row all-movies">
     <div *ngFor="let movie of filteredMovies.slice(0, splitIndex); index as i" class="col-6 col-sm-4 col-md-3 col-lg-2 movie-card">
-      <div class="card-inside" (click)="playTrailer(movie, 0, i)">
+      <div class="card-inside" (click)="playTrailer(movie, 0, i, trailer)">
         <app-movie-card [movie]="movie" [selected]="movie.EventCode===selectedMovie.EventCode"></app-movie-card>
       </div>
     </div>
     <div class="col-12">
-      <div class=" ui-g tailer-row" *ngIf="selectedMovie.EventCode">
-        <div class="ui-g-7 video-container-ng">
-          <iframe class="video" [src]="safeUrl" frameborder="0" allowfullscreen></iframe>
+      <div class=" ui-g tailer-row" *ngIf="selectedMovie.EventCode" appScrollTo #trailer>
+        <div class="ui-g-8 video-container-ng">
+          <iframe class="video" allow=autoplay [src]="safeUrl" frameborder="0" allowfullscreen></iframe>
         </div>
-        <div class="ui-g-5 details-container-ng">
+        <div class="ui-g-4 details-container-ng">
           <div class="details">
-            <h3>{{selectedMovie.EventName}}</h3>
-            <h4>{{selectedMovie.EventLanguage}}</h4>
+            <h5>{{selectedMovie.EventName}}</h5>
+            <h6>{{selectedMovie.EventLanguage}}</h6>
             <div>
-              <span class="chips" *ngFor="let genre of selectedMovie.EventGenre.split('|')">{{genre}}</span>
+              <span class="chips-g" *ngFor="let genre of selectedMovie.EventGenre.split('|')">{{genre}}</span>
             </div>
             <div class="ui-g rates">
               <div class="ui-g-1">
@@ -83,12 +83,26 @@
                 <div>{{selectedMovie.ShowDate?.split(",")[1]}}</div>
               </div>
             </div>
+            <div class="like-group ui-g">
+              <div class="ui-g-3">
+                <fa id="like" name="thumbs-up"></fa>
+                <div id="like-t">Will Watch</div>
+              </div>
+              <div class="ui-g-6">
+                <fa id="maybe" name="question"></fa>
+                <div id="maybe-t">Maybe</div>
+              </div>
+              <div class="ui-g-3">
+                <fa id="dislike" name="thumbs-down"></fa>
+                <div id="dislike-t">Won't Watch</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div *ngFor="let movie of filteredMovies.slice(splitIndex); index as i" class="col-lg-2 col-md-3 col-sm-4 col-6 movie-card">
-      <div class="card-inside" [ngClass]="{'selected': movie.EventCode===selectedMovie.EventCode}" (click)="playTrailer(movie, splitIndex, i)">
+      <div class="card-inside" [ngClass]="{'selected': movie.EventCode===selectedMovie.EventCode}" (click)="playTrailer(movie, splitIndex, i, trailer)">
         <app-movie-card [movie]="movie" [selected]="movie.EventCode===selectedMovie.EventCode"></app-movie-card>
       </div>
     </div>
